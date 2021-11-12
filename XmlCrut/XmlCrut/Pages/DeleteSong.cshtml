@@ -1,0 +1,26 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    
+</head>
+<body>
+        <p>Weet u zeker dat u deze Song wilt verwijderen?</p>
+        <form>
+            <label for="html">Ja</label><input type="radio" id="ja" name="ja" value="ja">
+            <label for="html">Nee</label><input type="radio" id="nee" name="nee" value="nee">
+            <br /><br />
+            <input type="submit" value="Submit">
+        </form>
+
+    @if (IsPost)
+    {
+        if (Request.Form["keuze"]== "ja")
+        {
+            string id = Request.QueryString["id"];
+            mySongMethods.DeleteSong(id, file);
+        }
+        Response.Redirect(@"~/index.cshtml");
+    }
+</body>
+</html>

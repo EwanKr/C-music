@@ -1,0 +1,55 @@
+﻿<!DOCTYPE html>
+@using System.Data;
+@using XmlCrut.App_Code;
+
+@{
+    SongMethods mysongmethods = Session["playlistclass"] as SongMethods;
+    string file = Session["file"] as string;
+}
+<html>
+<head>
+</head>
+<body>
+
+    <form>
+        <label for="fname">ID:</label>
+        <input type="text" id="id" name="id" value="">
+        <br>
+        <label for="lname">Artist:</label>
+        <input type="text" id="artist" name="artist" value="">
+        <br>
+        <label for="lname">Title:</label>
+        <input type="text" id="title" name="title" value="">
+        <br>
+        <label for="lname">Year:</label>
+        <input type="text" id="year" name="year" value="">
+        <br>
+        <label for="lname">Genre:</label>
+        <input type="text" id="genre" name="genre" value="">
+        <br>
+        <label for="lname">Time:</label>
+        <input type="text" id="time" name="time" value="">
+        <br>
+        <label for="lname">File:</label>
+        <input type="text" id="file" name="file" value="">
+        <br>
+        <input type="submit" value="Submit">
+    </form>
+
+    @if (IsPost)
+    {
+        DataRow dr = mysongmethods.GetEmptyDataRow();
+
+        dr[0] = Request.Form["id"];
+        dr[1] = Request.Form["artist"];
+        dr[2] = Request.Form["title"];
+        dr[3] = Request.Form["year"];
+        dr[4] = Request.Form["genre"];
+        dr[5] = Request.Form["time"];
+        dr[6] = Request.Form["file"];
+
+        mysongmethods.CreateSong(dr, file);
+        Response.Redirect("@~/index.cshtml");
+    }
+</body>
+</html>
